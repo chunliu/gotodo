@@ -14,12 +14,21 @@ func addTodoItem(item Todo) Todo {
 	return item
 }
 
-func findTodo(id int) Todo {
-	for _, t := range todoItems {
+func findTodo(id int) (int, Todo) {
+	for i, t := range todoItems {
 		if t.ID == id {
-			return t
+			return i, t
 		}
 	}
 
-	return Todo{}
+	return 0, Todo{}
+}
+
+func updateTodo(i int, t Todo) {
+	todoItems[i].Name = t.Name
+	todoItems[i].IsCompleted = t.IsCompleted
+}
+
+func deleteTodo(i int) {
+	todoItems = append(todoItems[0:i], todoItems[i+1:]...) // delete a specific item from slice
 }

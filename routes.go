@@ -42,6 +42,16 @@ var routes = Routes{
 	Route{
 		Method:  "POST",
 		Pattern: "/todo",
-		Handle:  createItem,
+		Handle:  create,
+	},
+	Route{
+		Method:  "PUT",
+		Pattern: "/todo/:id",
+		Handle:  update,
+	},
+	Route{
+		Method:  "DELETE",
+		Pattern: "/todo/:id",
+		Handle:  delete,
 	},
 }
