@@ -1,21 +1,28 @@
 package main
 
-var currentID int
-var todoItems TodoItems
-
-func init() {
-	addTodoItem(Todo{Name: "Todo Item 1", IsCompleted: false})
+// TodoRepo is the repository for all todo items.
+type TodoRepo struct {
+	CurrentID int
+	Items     TodoItems
 }
 
-func addTodoItem(item Todo) Todo {
-	item.ID = currentID
-	todoItems = append(todoItems, item)
-	currentID++
+var todoRepo TodoRepo
+
+func init() {
+	todoRepo.Add(Todo{Name: "Todo Item 1", IsCompleted: false})
+}
+
+// Add function adds a new todo item to the repo.
+func (tr *TodoRepo) Add(item Todo) Todo {
+	item.ID = tr.CurrentID
+	tr.Items = append(tr.Items, item)
+	tr.CurrentID++
 	return item
 }
 
-func findTodo(id int) (int, Todo) {
-	for i, t := range todoItems {
+// Find function finds a specific item according to the value of id.
+func (tr *TodoRepo) Find(id int) (int, Todo) {
+	for i, t := range tr.Items {
 		if t.ID == id {
 			return i, t
 		}
@@ -24,11 +31,13 @@ func findTodo(id int) (int, Todo) {
 	return 0, Todo{}
 }
 
-func updateTodo(i int, t Todo) {
-	todoItems[i].Name = t.Name
-	todoItems[i].IsCompleted = t.IsCompleted
+// Update function updates an item according to its index in the slice.
+func (tr *TodoRepo) Update(i int, t Todo) {
+	tr.Items[i].Name = t.Name
+	tr.Items[i].IsCompleted = t.IsCompleted
 }
 
-func deleteTodo(i int) {
-	todoItems = append(todoItems[0:i], todoItems[i+1:]...) // delete a specific item from slice
+// Delete function deletes an item based on its index.
+func (tr *TodoRepo) Delete(i int) {
+	tr.Items = append(tr.Items[0:i], tr.Items[i+1:]...) // delete a specific item from slice
 }

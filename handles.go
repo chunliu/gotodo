@@ -12,14 +12,14 @@ import (
 )
 
 func index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	fmt.Fprint(w, "Welcome!\n")
+	fmt.Fprint(w, "Welcome to the todo list app!\n")
 }
 
 func getAll(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	// Add necessary header to the response
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
-	if err := json.NewEncoder(w).Encode(todoItems); err != nil {
+	if err := json.NewEncoder(w).Encode(todoRepo.Items); err != nil {
 		panic(err)
 	}
 }
@@ -32,7 +32,7 @@ func getByID(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		return
 	}
 
-	_, t := findTodo(i)
+	_, t := todoRepo.Find(i)
 	if t == (Todo{}) {
 		w.WriteHeader(http.StatusNotFound)
 	} else {
@@ -73,7 +73,7 @@ func create(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		return
 	}
 
-	t = addTodoItem(t)
+	t = todoRepo.Add(t)
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusCreated)
 	err = json.NewEncoder(w).Encode(t)
@@ -99,11 +99,11 @@ func update(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		return
 	}
 
-	i, todo := findTodo(id)
+	i, todo := todoRepo.Find(id)
 	if todo == (Todo{}) {
 		w.WriteHeader(http.StatusNotFound)
 	} else {
-		updateTodo(i, t)
+		todoRepo.Update(i, t)
 		w.WriteHeader(http.StatusNoContent)
 	}
 }
@@ -115,11 +115,11 @@ func delete(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		return
 	}
 
-	i, todo := findTodo(id)
+	i, todo := todoRepo.Find(id)
 	if todo == (Todo{}) {
 		w.WriteHeader(http.StatusNotFound)
 	} else {
-		deleteTodo(i)
+		todoRepo.Delete(i)
 		w.WriteHeader(http.StatusNoContent)
 	}
 }
