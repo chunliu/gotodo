@@ -5,6 +5,7 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/*.exe": true
+        "**/*.exe": true,
+        "gotodo": true
     }
 }
