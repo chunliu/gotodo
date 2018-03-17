@@ -1,6 +1,6 @@
 # gotodo
 
-Todo list web api implemented with Go
+A todo list web app implemented with Go. 
 
 ## Enable SSL
 

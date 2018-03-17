@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
+	"html/template"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -12,7 +12,14 @@ import (
 )
 
 func index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	fmt.Fprint(w, "Welcome to the todo list app!\n")
+	// fmt.Fprint(w, "Welcome to the todo list app!\n")
+	t, err := template.ParseFiles("pages/home.html")
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+	}
+	if err := t.Execute(w, nil); err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+	}
 }
 
 func getAll(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
