@@ -13,7 +13,7 @@ import (
 
 func index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	// fmt.Fprint(w, "Welcome to the todo list app!\n")
-	t, err := template.ParseFiles("pages/home.html")
+	t, err := template.ParseFiles("pages/index.html")
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 	}

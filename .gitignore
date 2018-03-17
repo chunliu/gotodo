@@ -14,3 +14,8 @@
 .glide/
 
 gotodo
+
+**/node_modules/*
+**/dist/
+**/built/
+**/package-lock.json
