@@ -1,0 +1,27 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: gotodo-app
+spec:
+  selector:
+    matchLabels:
+      app: gotodo-app
+  replicas: 1 
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: gotodo-app
+    spec:
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: nginxsecret
+      containers:
+      - name: gotodo-ctn
+        image: chunliu/gotodoimg:v0.2.0
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        volumeMounts:
+        - mountPath: /etc/nginx/ssl
+          name: secret-volume
