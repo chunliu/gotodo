@@ -12,6 +12,6 @@ COPY gotodo.sh .
 RUN chmod +x ./gotodo \
     && chmod +x ./gotodo.sh 
 
-EXPOSE 80
+EXPOSE 80 443
 
 CMD [ "/bin/bash", "/gotodo/gotodo.sh" ]
