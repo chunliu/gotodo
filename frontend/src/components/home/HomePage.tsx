@@ -18,7 +18,8 @@ interface IHomeState {
 }
 
 class HomePage extends React.Component<{}, IHomeState> {
-    private baseUrl = "http://localhost:8080";
+    // private baseUrl = "http://localhost:8080"; // for debugging
+    private baseUrl = "";
 
     constructor(props: {}) {
         super(props);
