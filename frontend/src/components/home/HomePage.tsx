@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Card, Table } from "antd";
-import { ColumnProps } from "antd/lib/table";
+import { Card, Table, Button } from "antd";
 import "whatwg-fetch";
+
+const { Column } = Table;
 
 interface TodoItem {
     id: number;
@@ -14,32 +15,42 @@ interface IHomeState {
     todoItems: TodoItem[];
 }
 
-const columns: Array<ColumnProps<TodoItem>> = [{
-    title: "Id",
-    dataIndex: "id",
-    key: "id",
-}, {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-}, {
-    title: "Completed",
-    dataIndex: "isCompleted",
-    key: "isCompleted",
-    render: (text: any, record: TodoItem, index: number) => {
-        return <span>{record.isCompleted ? "true" : "false"}</span>;
-    },
-}];
-
 class HomePage extends React.Component<{}, IHomeState> {
     constructor(props: {}) {
         super(props);
         this.state = {todoItems: []};
-        this.mapTodoItem = this.mapTodoItem.bind(this);
         this.mapTodoItems = this.mapTodoItems.bind(this);
+        this.fetchTodoList = this.fetchTodoList.bind(this);
+        this.updateTodoList = this.updateTodoList.bind(this);
     }
 
     public componentDidMount() {
+        this.fetchTodoList();
+    }
+
+    public render(): JSX.Element {
+        return (
+            <Card bordered title="Welcome to Go Todo" style={{ margin: "16px 16px"}}>
+                <Table dataSource={this.state.todoItems}>
+                    <Column title="Id" dataIndex="id" key="id"></Column>
+                    <Column title="Task" dataIndex="name" key="name"></Column>
+                    <Column title="Status" dataIndex="isCompleted" key="isCompleted"
+                        render={(text: any, record: TodoItem, index: number) => {
+                            return <span>{record.isCompleted ? "Completed" : "Pending"}</span>;
+                        }}></Column>
+                    <Column title="Action" key="action" render={(text: any, record: TodoItem, index: number) => (
+                        <Button type="primary" disabled={record.isCompleted}
+                            onClick={() => {
+                                record.isCompleted = true;
+                                this.updateTodoList(record);
+                            }}>Complete</Button>
+                    )} />
+                </Table>
+            </Card>
+        );
+    }
+
+    private fetchTodoList() {
         const url = `http://localhost:8080/todo`;  // for local debugging
         // const url = `/todo`;   // for deployment
         fetch(url)
@@ -50,29 +61,18 @@ class HomePage extends React.Component<{}, IHomeState> {
             });
     }
 
-    public render(): JSX.Element {
-        return (
-            <Card bordered title="Welcome to Go Todo" style={{ margin: "16px 16px"}}>
-                <Table dataSource={this.state.todoItems} columns={columns} />
-            </Card>
-        );
+    private updateTodoList(item: TodoItem) {
+        let url = "http://localhost:8080/todo/" + item.id;
+        fetch(url, {
+            method: "PUT",
+            body: JSON.stringify(item),
+        }).then(() => {this.fetchTodoList();});
     }
 
     private mapTodoItems(items: any[]): TodoItem[] {
-        // return items.map(this.mapTodoItem);
-        return items.map(item => {
+        return items.map((item) => {
             return item as TodoItem;
         });
-    }
-
-    private mapTodoItem(item: any): TodoItem {
-        // return {
-        //     id: item.id,
-        //     key: item.key,
-        //     name: item.name,
-        //     isCompleted: item.isCompleted,
-        // };
-        return item as TodoItem;
     }
 }
 
