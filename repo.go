@@ -9,12 +9,14 @@ type TodoRepo struct {
 var todoRepo TodoRepo
 
 func init() {
-	todoRepo.Add(Todo{Name: "Todo Item 1", IsCompleted: false})
+	todoRepo.Add(Todo{Name: "Create Web API with Go", IsCompleted: true})
+	todoRepo.Add(Todo{Name: "Build front end", IsCompleted: false})
 }
 
 // Add function adds a new todo item to the repo.
 func (tr *TodoRepo) Add(item Todo) Todo {
 	item.ID = tr.CurrentID
+	item.Key = tr.CurrentID
 	tr.Items = append(tr.Items, item)
 	tr.CurrentID++
 	return item
