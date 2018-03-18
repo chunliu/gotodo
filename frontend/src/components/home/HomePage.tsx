@@ -51,8 +51,8 @@ class HomePage extends React.Component<{}, IHomeState> {
     }
 
     private fetchTodoList() {
-        const url = `http://localhost:8080/todo`;  // for local debugging
-        // const url = `/todo`;   // for deployment
+        // const url = `http://localhost:8080/todo`;  // for local debugging
+        const url = `/todo`;   // for deployment
         fetch(url)
             .then((result) => (result.json()))
             .then(this.mapTodoItems)
@@ -62,7 +62,8 @@ class HomePage extends React.Component<{}, IHomeState> {
     }
 
     private updateTodoList(item: TodoItem) {
-        let url = "http://localhost:8080/todo/" + item.id;
+        // const url = "http://localhost:8080/todo/" + item.id;
+        const url = "/todo/" + item.id;
         fetch(url, {
             method: "PUT",
             body: JSON.stringify(item),
