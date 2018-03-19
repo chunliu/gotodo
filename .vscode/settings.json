@@ -6,6 +6,6 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         "**/*.exe": true,
-        "gotodo": true
+        "**/gotodo": true
     }
 }
