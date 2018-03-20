@@ -12,12 +12,19 @@ import (
 )
 
 func index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	// fmt.Fprint(w, "Welcome to the todo list app!\n")
+	// Get template
 	t, err := template.ParseFiles("pages/index.html")
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
-	if err := t.Execute(w, nil); err != nil {
+
+	// Insert template data
+	data := struct {
+		Title string
+	}{
+		Title: "Go Todo",
+	}
+	if err := t.Execute(w, data); err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 }
@@ -32,7 +39,7 @@ func getAll(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 }
 
 func getByID(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	// input param must be an int
+	// Input param must be an int
 	i, err := strconv.Atoi(ps.ByName("id"))
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
