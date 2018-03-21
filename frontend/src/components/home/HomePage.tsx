@@ -45,7 +45,7 @@ class HomePage extends React.Component<{}, IHomeState> {
             <div>
                 <Card bordered title="Welcome to Go Todo" style={{ margin: "16px 16px"}}>
                     <Button type="primary" icon="plus"
-                        onClick={() => {this.setState({modalVisible: true})}}>New Task</Button>
+                        onClick={() => {this.setState({modalVisible: true}); }}>New Task</Button>
                     <Table dataSource={this.state.todoItems}>
                         <Column title="Id" dataIndex="id" key="id"></Column>
                         <Column title="Task" dataIndex="name" key="name"></Column>
@@ -107,12 +107,12 @@ class HomePage extends React.Component<{}, IHomeState> {
     }
 
     private handleOk = () => {
-        let item: TodoItem = {
+        const item: TodoItem = {
             id: 0,
             key: 0,
             name: this.state.newTaskName,
             isCompleted: false,
-        }
+        };
         this.addTodoItem(item);
         this.setState({modalVisible: false});
     }

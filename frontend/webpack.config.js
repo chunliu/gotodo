@@ -9,7 +9,7 @@ module.exports = {
     mode: 'development',
     context: resolve(__dirname, 'src'),
     entry: [
-        'whatwg-fetch',
+        // 'whatwg-fetch',
         // activate HMR for React
         'webpack-dev-server/client?http://localhost:8081',
         // bundle the client for webpack-dev-server
@@ -33,6 +33,7 @@ module.exports = {
         extensions: [".ts", ".tsx", ".js", ".json"]
     },
     devServer: {
+        port: '8081',
         hot: true,
         // enable HMR on the server
         noInfo: true,
