@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     mode: 'development',
@@ -10,7 +11,7 @@ module.exports = {
     entry: [
         'whatwg-fetch',
         // activate HMR for React
-        'webpack-dev-server/client?http://localhost:8080',
+        'webpack-dev-server/client?http://localhost:8081',
         // bundle the client for webpack-dev-server
         // and connect to the provided endpoint
         'webpack/hot/only-dev-server',
@@ -73,8 +74,14 @@ module.exports = {
                 exclude: [resolve(__dirname, "node_modules")],                
             },
             { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
-            { test: /\.css$/, loader: "style-loader!css-loader" },
-            { test: /\.less$/, loaders: ["style-loader", "css-loader", "less-loader"]},
+            {
+                test:/\.css$/,
+                use: [MiniCssExtractPlugin.loader, "css-loader"]  
+            },
+            {
+                test:/\.less$/,
+                use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"]
+            },
             { test: /\.png$/, loader: "url-loader?limit=100000" },
             { test: /\.jpg$/, loader: "file-loader" },
             { test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
@@ -84,12 +91,16 @@ module.exports = {
         ]
     },
     plugins: [
+        new MiniCssExtractPlugin({
+            filename: "style.css",
+            chunkFilename: "[id].css"
+          }),
         new webpack.HotModuleReplacementPlugin(),
         // enable HMR globally
         new webpack.NamedModulesPlugin(),
         // prints more readable module names in the browser console on HMR updates
         new HtmlWebpackPlugin({template: resolve(__dirname, 'src/index.html')}),
         // inject <script> in html file. 
-        new OpenBrowserPlugin({url: 'http://localhost:8080'}),
+        new OpenBrowserPlugin({url: 'http://localhost:8081'}),
     ],
 };
