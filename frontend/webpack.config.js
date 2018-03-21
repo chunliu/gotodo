@@ -5,12 +5,12 @@ const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
 
 module.exports = {
+    mode: 'development',
     context: resolve(__dirname, 'src'),
     entry: [
         'whatwg-fetch',
-        'react-hot-loader/patch',
         // activate HMR for React
-        'webpack-dev-server/client?http://localhost:8081',
+        'webpack-dev-server/client?http://localhost:8080',
         // bundle the client for webpack-dev-server
         // and connect to the provided endpoint
         'webpack/hot/only-dev-server',
@@ -53,7 +53,6 @@ module.exports = {
             { 
                 test: /\.(ts|tsx)?$/, 
                 use: [
-                    {loader: 'react-hot-loader/webpack'}, 
                     {
                         loader: 'ts-loader',
                         options: {
@@ -91,6 +90,6 @@ module.exports = {
         // prints more readable module names in the browser console on HMR updates
         new HtmlWebpackPlugin({template: resolve(__dirname, 'src/index.html')}),
         // inject <script> in html file. 
-        new OpenBrowserPlugin({url: 'http://localhost:8081'}),
+        new OpenBrowserPlugin({url: 'http://localhost:8080'}),
     ],
 };
