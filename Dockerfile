@@ -9,12 +9,14 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 WORKDIR /gotodo
 COPY server/pages/index.html ./pages/index.html
 COPY server/static/gotodo.js ./static/gotodo.js
+COPY server/static/style.css ./static/style.css
 COPY server/gotodo .
 COPY gotodo.sh .
 RUN chmod +x ./gotodo \
     && chmod +x ./gotodo.sh \
     && chmod +r ./pages/index.html \
-    && chmod +r ./static/gotodo.js
+    && chmod +r ./static/gotodo.js \
+    && chmod +r ./static/style.css
 
 EXPOSE 80 443
 
