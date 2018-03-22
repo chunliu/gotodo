@@ -10,7 +10,13 @@ The app can be deployed to a web server directly, containerized in a docker imag
 
 To build the server component, go to `server` folder and run `go build -o gotodo`. 
 
-To build the front end component, go to `frontend` folder and run `npm run prepublish`.
+To build the front end component, go to `frontend` folder and run `npm run prepare`, and then copy `gotodo.js` and `style.css` from `frontend/dist` folder to `server/static` folder. 
+
+To build docker image, in the root folder, run `docker build -t gotodoimg .`.
+
+To deploy it to a k8s cluster, run `kubectl apply -f k8s/k8s-deployment.yaml`. 
+
+To deploy it to Azure AKS, change the image in `k8s/ask-deployment.yaml` to the one in your ACR, and run the `kubectl` command. 
 
 ## Enable SSL
 
