@@ -15,6 +15,7 @@
 
 gotodo
 **/gtd/gtd
+**/debug
 
 **/node_modules/*
 **/dist/

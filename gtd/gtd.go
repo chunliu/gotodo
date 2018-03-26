@@ -47,6 +47,16 @@ func main() {
 						Name:  "id",
 						Usage: "The id of the existing todo item.",
 					},
+					&cli.StringFlag{
+						Name:    "name",
+						Aliases: []string{"n"},
+						Usage:   "The name of the todo item.",
+					},
+					&cli.BoolFlag{
+						Name:    "completed",
+						Aliases: []string{"c"},
+						Usage:   "The status of the todo item.",
+					},
 				},
 				Action: update,
 			},

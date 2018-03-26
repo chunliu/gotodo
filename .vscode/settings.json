@@ -7,6 +7,7 @@
         "**/.DS_Store": true,
         "**/*.exe": true,
         "**/gotodo": true,
-        "**/gtd/gtd": true
+        "**/gtd/gtd": true,
+        "**/debug": true
     }
 }
