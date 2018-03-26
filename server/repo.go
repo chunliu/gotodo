@@ -9,6 +9,7 @@ type TodoRepo struct {
 var todoRepo TodoRepo
 
 func init() {
+	todoRepo.CurrentID = 1 // Id start with 1
 	todoRepo.Add(Todo{Name: "Create Web API with Go", IsCompleted: true})
 	todoRepo.Add(Todo{Name: "Build front end", IsCompleted: false})
 }
