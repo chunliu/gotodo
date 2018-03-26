@@ -1,4 +1,3 @@
 #!/bin/bash
-nginx;  # Start nginx
+nginx -g "daemon on;"  # Start nginx as daemon
 /gotodo/gotodo # Start our Go app
-exit 0

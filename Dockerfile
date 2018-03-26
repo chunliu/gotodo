@@ -7,9 +7,8 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Setup Go app
 WORKDIR /gotodo
-COPY server/pages/index.html ./pages/index.html
-COPY server/static/gotodo.js ./static/gotodo.js
-COPY server/static/style.css ./static/style.css
+COPY server/pages/ ./pages/
+COPY server/static/ ./static/
 COPY server/gotodo .
 COPY gotodo.sh .
 RUN chmod +x ./gotodo \
