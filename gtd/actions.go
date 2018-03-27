@@ -35,6 +35,8 @@ func get(c *cli.Context) error {
 		return cli.Exit(fmt.Errorf(resp.Status), 12)
 	}
 
+	defer resp.Body.Close()
+
 	if id == 0 {
 		var todos TodoItems
 
@@ -79,6 +81,8 @@ func create(c *cli.Context) error {
 	if resp.StatusCode != http.StatusCreated {
 		return cli.Exit(fmt.Errorf(resp.Status), 12)
 	}
+
+	defer resp.Body.Close()
 
 	if err := json.NewDecoder(resp.Body).Decode(&todo); err != nil {
 		return cli.Exit(fmt.Errorf("JSON decode: %v", err), 13)
