@@ -18,6 +18,8 @@ The app can be deployed to a web server directly, containerized in a docker imag
 
 * To deploy it to Azure AKS, change the image in `k8s/ask-deployment.yaml` to the one in your ACR, and run the `kubectl` command. 
 
+* To test the web API with a CLI, go to `gtd` folder and run `go build`, update the settings in `gtd/config.json` if necessary, and then you can run `./gtd` with the commands to test the API. 
+
 ## Enable SSL
 
 1. Create SSL key:
