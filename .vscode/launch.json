@@ -14,7 +14,9 @@
             "host": "127.0.0.1",
             "program": "${fileDirname}",
             "env": {},
-            "args": [],
+            "args": [
+                "create", "--name", "This is a new item."
+            ],
             "showLog": true
         }
     ]

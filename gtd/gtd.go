@@ -1,12 +1,33 @@
 package main
 
 import (
+	"encoding/json"
+	"log"
+	"net/url"
 	"os"
 
 	"gopkg.in/urfave/cli.v2"
 )
 
+var baseURL *url.URL
+
 func main() {
+	file, err := os.Open("config.json")
+	defer file.Close() // defer is required because log.Fatal could exit.
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	conf := Config{}
+	err = json.NewDecoder(file).Decode(&conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	baseURL, err = url.Parse(conf.BaseURL)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	app := &cli.App{
 		Name:        "gtd",
 		Usage:       "A cli to interact with gotodo web api.",

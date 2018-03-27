@@ -10,3 +10,8 @@ type Todo struct {
 
 // TodoItems is an array of all todo items.
 type TodoItems []Todo
+
+// Config is the data model of gtd configurations.
+type Config struct {
+	BaseURL string `json:"baseURL"`
+}
