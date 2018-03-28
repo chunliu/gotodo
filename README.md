@@ -30,3 +30,6 @@ The app can be deployed to a web server directly, containerized in a docker imag
 
     ```docker run --name gotodo -p 80:80 -p 443:443 -d -v ~/tmp:/etc/nginx/ssl chunliu/gotodoimg```
     
+## Todo
+
+* Connect to a MySql database
