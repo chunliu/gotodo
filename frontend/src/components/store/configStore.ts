@@ -1,8 +1,8 @@
-import { createStore, applyMiddleware, Dispatch, Action } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import {composeWithDevTools} from "redux-devtools-extension/developmentOnly";
 import thunk from "redux-thunk";
 import { TodoItem } from "../model/TodoItem";
-import { fetchTodos } from "../actions/actions";
+import { fetchTodosAsync, initStoreAction } from "../actions/actions";
 import { rootReducer } from "../reducers/rootReducer";
 
 export interface IState {
@@ -10,8 +10,9 @@ export interface IState {
 }
 
 export const initStore = () => {
-    return (dispatch: any) => {
-        return dispatch(fetchTodos());
+    return async (dispatch: any) => {
+        const todos = await fetchTodosAsync<TodoItem[]>();
+        return dispatch(initStoreAction(todos));
     };
 };
 

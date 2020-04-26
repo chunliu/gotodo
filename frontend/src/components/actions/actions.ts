@@ -1,8 +1,6 @@
 import { TodoItem } from "../model/TodoItem";
 import { ActionTypes, IInitStoreAction, IAddTodoAction, ICompleteTodoAction } from "./actionTypes";
 import { fetch } from "cross-fetch";
-import { Dispatch, Action } from "redux";
-import { resolve } from "dns";
 
 export const initStoreAction = (todos: TodoItem[]): IInitStoreAction => {
     return {type: ActionTypes.INIT_STORE, todos};
@@ -21,20 +19,19 @@ export const actionCreators = {
     completeTodoAction,
 };
 
-export const fetchTodos = () => {
+export async function fetchTodosAsync<T>(): Promise<T> {
     const url = 'http://localhost' + '/todo';
-    return (dispatch: Dispatch<Action>) => {
-        return fetch(url)
-                .then(result => result.json())
-                .then(mapTodoItems)
-                .then(todoItems => {
-                    return dispatch(initStoreAction(todoItems));
-                });        
-    }
+    const resp = await fetch(url);
+    const data = await resp.json();
+    
+    return data;
 }
 
-function mapTodoItems(items: any[]): TodoItem[] {
-    return items.map((item) => {
-        return item as TodoItem;
-    });
+export async function addTodoAsync(todo: TodoItem): Promise<Response> {
+    const url = 'http://localhost' + '/todo';
+    const resp = await fetch(url, {
+            method: "POST",
+            body: JSON.stringify(todo),
+        });
+    return resp;
 }
