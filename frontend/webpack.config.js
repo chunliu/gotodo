@@ -18,7 +18,7 @@ module.exports = {
         // the entry point of our app
     ],
     output: {
-        filename: 'hotloader.js',
+        filename: 'gotodo.js',
         // the output bundle
         path: resolve(__dirname, 'dist'), 
         publicPath: '/'
