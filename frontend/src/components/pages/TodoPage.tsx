@@ -46,7 +46,7 @@ class TodoPageComponent extends React.Component<ITodoProps, ITodoState> {
                             <Button type="primary" disabled={record.isCompleted}
                                 onClick={() => {
                                     record.isCompleted = true;
-                                    this.props.actions.completeTodoAction(record);
+                                    this.props.actions.completeTodo(record);
                                 }}>Complete</Button>
                         )} />
                     </Table>
@@ -70,7 +70,7 @@ class TodoPageComponent extends React.Component<ITodoProps, ITodoState> {
             name: this.state.newTaskName,
             isCompleted: false,
         };
-        this.props.actions.addTodoAction(item);
+        this.props.actions.addTodo(item);
         this.setState({modalVisible: false});
     }
     private handleCancel = () => {
