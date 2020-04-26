@@ -1,7 +1,6 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -9,9 +8,7 @@ module.exports = {
     mode: 'development',
     context: resolve(__dirname, 'src'),
     entry: [
-        // 'whatwg-fetch',
-        // activate HMR for React
-        'webpack-dev-server/client?http://localhost:8081',
+        'webpack-dev-server/client?http://localhost:8080',
         // bundle the client for webpack-dev-server
         // and connect to the provided endpoint
         'webpack/hot/only-dev-server',
@@ -21,7 +18,7 @@ module.exports = {
         // the entry point of our app
     ],
     output: {
-        filename: 'gotodo.js',
+        filename: 'hotloader.js',
         // the output bundle
         path: resolve(__dirname, 'dist'), 
         publicPath: '/'
@@ -33,16 +30,18 @@ module.exports = {
         extensions: [".ts", ".tsx", ".js", ".json"]
     },
     devServer: {
-        port: '8081',
+        port: '8080',
+        // Change it if other port needs to be used
         hot: true,
         // enable HMR on the server
-        noInfo: true,
+        noInfo: false,
         quiet: false,
         // minimize the output to terminal.
         contentBase: resolve(__dirname, 'src'),
         // match the output path
-        publicPath: '/'
+        publicPath: '/',
         // match the output `publicPath`
+        open: true
     },
     module: {
         rules: [
@@ -102,6 +101,5 @@ module.exports = {
         // prints more readable module names in the browser console on HMR updates
         new HtmlWebpackPlugin({template: resolve(__dirname, 'src/index.html')}),
         // inject <script> in html file. 
-        new OpenBrowserPlugin({url: 'http://localhost:8081'}),
     ],
 };
