@@ -1,21 +1,16 @@
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: gotodo-app
----
-apiVersion: v1
 kind: Service
 metadata: 
-  name: gotodo-backend-svc
+  name: gotodo-frontend-svc
   namespace: gotodo-app
   labels:
-    app: gotodo-backend
+    app: gotodo-frontend
 spec:
   selector:
-    app: gotodo-backend
+    app: gotodo-frontend
   ports:
     - port: 80
-      targetPort: 8080
+      targetPort: 80
       protocol: TCP
   type: ClusterIP
 ---
@@ -23,22 +18,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: gotodo-backend
-  name: gotodo-backend-deploy
+    app: gotodo-frontend
+  name: gotodo-frontend-deploy
   namespace: gotodo-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gotodo-backend
+      app: gotodo-frontend
   template:
     metadata:
       labels:
-        app: gotodo-backend
+        app: gotodo-frontend
     spec:
       containers:
-      - image: chunliu.azurecr.io/gotodoimg:v0.2
-        name: gotodo-cnt
+      - image: chunliu.azurecr.io/gotodoimg-fe:v0.2
+        name: gotodo-fe-cnt
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         resources: {}
