@@ -6,6 +6,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/julienschmidt/httprouter"
@@ -34,6 +35,20 @@ func getAll(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 	if err := json.NewEncoder(w).Encode(todoRepo.Items); err != nil {
+		panic(err)
+	}
+}
+
+func getVersion(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	// Add necessary header to the response
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+	version := struct {
+		Version string `json:"version"`
+	}{
+		Version: os.Getenv("GOTODO_VERSION"),
+	}
+	if err := json.NewEncoder(w).Encode(version); err != nil {
 		panic(err)
 	}
 }

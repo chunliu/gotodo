@@ -58,4 +58,9 @@ var routes = Routes{
 		Pattern: "/todo/:id",
 		Handle:  delete,
 	},
+	Route{
+		Method:  "GET",
+		Pattern: "/version",
+		Handle:  getVersion,
+	},
 }
