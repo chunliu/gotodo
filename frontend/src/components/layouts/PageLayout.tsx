@@ -17,6 +17,9 @@ const PageLayout: React.StatelessComponent<{}> = () => {
                     <Redirect to="/home" />
                     {renderRoutes(routes)}
                 </Layout.Content>
+                <Layout.Footer style={{ textAlign: 'center' }}>
+                    Frontend Version: {process.env.REACT_APP_FE_VERSION}, Backend Version: 
+                </Layout.Footer >
             </Layout>
         </Layout>
     );

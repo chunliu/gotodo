@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const DotenvPlugin = require('dotenv-webpack');
 
 module.exports = {
     mode: 'production',
@@ -57,6 +58,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new DotenvPlugin(),
         new MiniCssExtractPlugin({
             filename: "style.css",
             chunkFilename: "[id].css"
