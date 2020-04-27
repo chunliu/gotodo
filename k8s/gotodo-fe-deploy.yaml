@@ -19,7 +19,7 @@ kind: Deployment
 metadata:
   labels:
     app: gotodo-frontend
-  name: gotodo-frontend-deploy
+  name: gotodo-frontend
   namespace: gotodo-app
 spec:
   replicas: 1
@@ -32,7 +32,7 @@ spec:
         app: gotodo-frontend
     spec:
       containers:
-      - image: chunliu.azurecr.io/gotodoimg-fe:v0.2
+      - image: chunliu.azurecr.io/gotodoimg-fe:v0.3
         name: gotodo-fe-cnt
         ports:
         - containerPort: 80

@@ -19,7 +19,7 @@ kind: Deployment
 metadata:
   labels:
     app: gotodo-backend
-  name: gotodo-backend-deploy
+  name: gotodo-backend
   namespace: gotodo-app
 spec:
   replicas: 1
@@ -32,8 +32,11 @@ spec:
         app: gotodo-backend
     spec:
       containers:
-      - image: chunliu.azurecr.io/gotodoimg-be:v0.2
+      - image: chunliu.azurecr.io/gotodoimg-be:v0.4
         name: gotodo-be-cnt
         ports:
         - containerPort: 8080
+        env:
+          - name: GOTODO_VERSION
+            value: '0.4.0'
         resources: {}
