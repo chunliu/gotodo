@@ -4,10 +4,11 @@ metadata:
   name: gotodo-backend-svc
   namespace: gotodo-app
   labels:
-    app: gotodo-backend
+    app: gotodo-app
+    tier: gotodo-backend
 spec:
   selector:
-    app: gotodo-backend
+    tier: gotodo-backend
   ports:
     - port: 80
       targetPort: 8080
@@ -18,18 +19,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: gotodo-backend
+    app: gotodo-app
+    tier: gotodo-backend
   name: gotodo-backend
   namespace: gotodo-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gotodo-backend
+      tier: gotodo-backend
   template:
     metadata:
       labels:
-        app: gotodo-backend
+        app: gotodo-app
+        tier: gotodo-backend
     spec:
       containers:
       - image: chunliu.azurecr.io/gotodoimg-be:v0.4

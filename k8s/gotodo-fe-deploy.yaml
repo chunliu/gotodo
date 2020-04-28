@@ -4,10 +4,11 @@ metadata:
   name: gotodo-frontend-svc
   namespace: gotodo-app
   labels:
-    app: gotodo-frontend
+    app: gotodo-app
+    tier: gotodo-frontend
 spec:
   selector:
-    app: gotodo-frontend
+    tier: gotodo-frontend
   ports:
     - port: 80
       targetPort: 80
@@ -18,18 +19,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: gotodo-frontend
+    app: gotodo-app
+    tier: gotodo-frontend
   name: gotodo-frontend
   namespace: gotodo-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gotodo-frontend
+      tier: gotodo-frontend
   template:
     metadata:
       labels:
-        app: gotodo-frontend
+        app: gotodo-app
+        tier: gotodo-frontend
     spec:
       containers:
       - image: chunliu.azurecr.io/gotodoimg-fe:v0.3
