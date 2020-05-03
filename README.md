@@ -8,27 +8,7 @@ The app can be deployed to a web server directly, containerized in a docker imag
 
 ## Build
 
-* To build the server component, go to `server` folder and run `go build -o gotodo`. 
-
-* To build the front end component, go to `frontend` folder and run `npm run prepare`, and then copy `gotodo.js` and `style.css` from `frontend/dist` to `server/static`. 
-
-* To build docker image, in the root folder, run `docker build -t gotodoimg .`.
-
-* To deploy it to a k8s cluster, run `kubectl apply -f k8s/k8s-deployment.yaml`. 
-
-* To deploy it to Azure AKS, change the image in `k8s/ask-deployment.yaml` to the one in your ACR, and run the `kubectl` command. 
-
-* To test the web API with a CLI, go to `gtd` folder and run `go build`, update the settings in `gtd/config.json` if necessary, and then you can run `./gtd` with the commands to test the API. 
-
-## Enable SSL
-
-1. Create SSL key:
-
-    ```openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ~/tmp/nginx.key -out ~/tmp/nginx.crt -subj "/CN=gotodo/O=gotodo"```
-
-2. To test the SSL locally with docker image:
-
-    ```docker run --name gotodo -p 80:80 -p 443:443 -d -v ~/tmp:/etc/nginx/ssl chunliu/gotodoimg```
+To be updated...
     
 ## Todo
 

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gotodo-cm
+  namespace: {{ .Release.Namespace }}
+data:
+  be-version: {{ .Values.cm.beVersion | quote }}

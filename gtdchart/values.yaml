@@ -1,0 +1,14 @@
+backend: 
+  replicaCount: 1
+  image:
+    repository: chunliu.azurecr.io/gotodoimg-be
+    tag: v0.4
+
+frontend:
+  replicaCount: 1
+  image:
+    repository: chunliu.azurecr.io/gotodoimg-fe
+    tag: v0.3
+
+cm:
+  beVersion: '0.4.0'

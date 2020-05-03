@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata: 
   name: gotodo-frontend-svc
-  namespace: gotodo-app
+  namespace: {{ .Release.Namespace }}
   labels:
     app: gotodo-app
     tier: gotodo-frontend
@@ -22,9 +22,9 @@ metadata:
     app: gotodo-app
     tier: gotodo-frontend
   name: gotodo-frontend
-  namespace: gotodo-app
+  namespace: {{ .Release.Namespace }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.frontend.replicaCount }}
   selector:
     matchLabels:
       tier: gotodo-frontend
@@ -35,7 +35,7 @@ spec:
         tier: gotodo-frontend
     spec:
       containers:
-      - image: chunliu.azurecr.io/gotodoimg-fe:v0.3
+      - image: {{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}
         name: gotodo-fe-cnt
         ports:
         - containerPort: 80
