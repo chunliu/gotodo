@@ -2,7 +2,7 @@ import { TodoItem } from "../model/TodoItem";
 import { ActionTypes, IInitStoreAction, IAddTodoAction, ICompleteTodoAction } from "./actionTypes";
 import { fetch } from "cross-fetch";
 
-const baseUrl = "";
+const baseUrl = (process.env.NODE_ENV === "development") ? "http://localhost" : "";
 
 export const initStoreAction = (todos: TodoItem[]): IInitStoreAction => {
     return {type: ActionTypes.INIT_STORE, todos};

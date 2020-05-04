@@ -1,9 +1,9 @@
 import { Action } from "redux";
-import { initState } from "./rootReducer";
+import { TodoItem } from "../model/TodoItem";
 import * as todoActions from "../actions/actionTypes";
 
 export const todos = (
-    state = initState.todos,
+    state: TodoItem[] = [],
     action: Action,
 ) => {
     switch (action.type) {

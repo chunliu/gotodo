@@ -39,7 +39,8 @@ class PageLayout extends React.Component<{}, ILayoutState> {
 
     public componentDidMount() {
         if(this.state.version === "") {
-            const url = "" + "/version";
+            const baseUrl = (process.env.NODE_ENV === "development") ? "http://localhost" : "";
+            const url = baseUrl + "/version";
             fetch(url)
                 .then(resp => resp.json())
                 .then(data => {
