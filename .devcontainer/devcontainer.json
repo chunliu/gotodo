@@ -1,0 +1,10 @@
+{
+    "extensions": [
+        "ms-vscode.Go",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+    ],
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/zsh",
+        "terminal.integrated.fontFamily": "Delugia Nerd Font Book",
+    }
+}
