@@ -13,11 +13,8 @@ RUN apk --no-cache add ca-certificates
 WORKDIR /gotodoapp
 COPY --from=builder /app/gotodo ./
 COPY --from=builder /app/pages ./pages
-COPY --from=builder /app/static ./static
 RUN chmod +x ./gotodo \
-    && chmod +r ./pages/index.html \
-    && chmod +r ./static/gotodo.js \
-    && chmod +r ./static/style.css
+    && chmod +r ./pages/index.html
 
 EXPOSE 8080
 

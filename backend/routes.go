@@ -1,8 +1,6 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -22,7 +20,7 @@ func newRoutes() *httprouter.Router {
 		router.Handle(r.Method, r.Pattern, r.Handle)
 	}
 	// Serve static files
-	router.ServeFiles("/static/*filepath", http.Dir("static"))
+	// router.ServeFiles("/static/*filepath", http.Dir("static"))
 
 	return router
 }
