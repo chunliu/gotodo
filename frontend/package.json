@@ -18,7 +18,7 @@
     "url": "https://github.com/chunliu/typescript-react-hot-reload"
   },
   "dependencies": {
-    "@azure/msal-browser": "^2.0.0-beta.0",
+    "@azure/msal-browser": "^2.0.0-beta.1",
     "antd": "^3.26.16",
     "cross-fetch": "^3.0.4",
     "react": "^16.13.1",

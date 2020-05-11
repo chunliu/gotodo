@@ -20,3 +20,4 @@ gotodo
 **/node_modules/*
 **/dist/
 **/built/
+**/.env
